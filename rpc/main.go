@@ -6,7 +6,7 @@ import (
 	"github.com/ipaqsa/netcom/packUtils"
 )
 
-func ReadPack(data []byte, response *packUtils.Package, opt Options) (*packUtils.Package, *packUtils.Package, error) {
+func ReadPack(data []byte, response *packUtils.Package, opt *Options) (*packUtils.Package, *packUtils.Package, error) {
 	ans := packUtils.CreatePack("answer", "")
 	pack := packUtils.Unmarshal(data)
 	if pack == nil {
