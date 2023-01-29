@@ -10,24 +10,16 @@ func ReadPack(data []byte, response *packUtils.Package, opt *Options) (*packUtil
 	ans := packUtils.CreatePack("answer", "")
 	pack := packUtils.Unmarshal(data)
 	if pack == nil {
-		ans.Body.Data = "unmarshal err"
-		opt.encrypt = false
-		*response = *ans
-		return nil, nil, errors.New(ans.Body.Data)
+		return nil, nil, errors.New("unmarshal err")
 	}
 	if opt.encrypt {
 		err := pack.Decrypt(opt.key_sender)
 		if err != nil {
-			ans.Body.Data = err.Error()
-			opt.encrypt = false
-			*response = *ans
-			return nil, nil, errors.New(ans.Body.Data)
+			return nil, nil, errors.New(err.Error())
 		}
 		sender := cryptoUtils.ParsePublic(pack.Head.Sender)
 		if sender == nil {
-			ans.Body.Data = "parse sender key fail"
-			*response = *ans
-			return nil, nil, errors.New(ans.Body.Data)
+			return nil, nil, errors.New("parse sender key fail")
 		}
 		opt.key_receiver = sender
 	}
