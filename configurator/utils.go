@@ -3,6 +3,7 @@ package configurator
 import (
 	"errors"
 	"net"
+	"os"
 	"path"
 	"strings"
 )
@@ -38,4 +39,15 @@ func splitPath(cpath string) (string, string, string) {
 	cpath = strings.TrimSuffix(cpath, filename)
 	filename = strings.TrimSuffix(filename, ext)
 	return cpath, filename, ext
+}
+
+func exists(path string) bool {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true
+	}
+	if os.IsNotExist(err) {
+		return false
+	}
+	return false
 }
