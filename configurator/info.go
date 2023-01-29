@@ -8,7 +8,7 @@ import (
 
 var Info InfoT
 
-func initInfo(port string) {
+func InitInfo(port string) {
 	Info.OS = runtime.GOOS
 	Info.Arch = runtime.GOARCH
 	if _, err := os.Lstat("/.dockerenv"); err != nil && os.IsNotExist(err) {
@@ -23,6 +23,7 @@ func initInfo(port string) {
 	} else {
 		Info.Address = taddr.String() + port
 	}
+	printInfo()
 }
 
 func printInfo() {

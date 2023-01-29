@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func InitConfiguration(config interface{}, version string, port string) error {
+func InitConfiguration(config interface{}, version string) error {
 	err := initConfig()
 	if err != nil {
 		return err
@@ -26,7 +26,5 @@ func InitConfiguration(config interface{}, version string, port string) error {
 		return err
 	}
 	setVersion(version)
-	initInfo(port)
-	printInfo()
 	return nil
 }
