@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"errors"
+	"github.com/ipaqsa/netcom/cryptoUtils"
 	"github.com/ipaqsa/netcom/packUtils"
 )
 
@@ -9,7 +10,8 @@ func ReadPack(data []byte, response *packUtils.Package, opt Options) (*packUtils
 	ans := packUtils.CreatePack("answer", "")
 	pack := packUtils.Unmarshal(data)
 	if pack == nil {
-		ans.Body.Data = "serialise err"
+		ans.Body.Data = "unmarshal err"
+		opt.encrypt = false
 		*response = *ans
 		return nil, nil, errors.New(ans.Body.Data)
 	}
@@ -17,9 +19,17 @@ func ReadPack(data []byte, response *packUtils.Package, opt Options) (*packUtils
 		err := pack.Decrypt(opt.key_sender)
 		if err != nil {
 			ans.Body.Data = err.Error()
+			opt.encrypt = false
 			*response = *ans
 			return nil, nil, errors.New(ans.Body.Data)
 		}
+		sender := cryptoUtils.ParsePublic(pack.Head.Sender)
+		if sender == nil {
+			ans.Body.Data = "parse sender key fail"
+			*response = *ans
+			return nil, nil, errors.New(ans.Body.Data)
+		}
+		opt.key_receiver = sender
 	}
 	return pack, ans, nil
 }
