@@ -8,7 +8,7 @@ import (
 
 var Info InfoT
 
-func initInfo() {
+func initInfo(port string) {
 	Info.OS = runtime.GOOS
 	Info.Arch = runtime.GOARCH
 	if _, err := os.Lstat("/.dockerenv"); err != nil && os.IsNotExist(err) {
@@ -21,7 +21,7 @@ func initInfo() {
 	if taddr == nil {
 		Info.Address = "internal network is not available"
 	} else {
-		Info.Address = taddr.String()
+		Info.Address = taddr.String() + port
 	}
 }
 
