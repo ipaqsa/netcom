@@ -1,9 +1,9 @@
-package netcom
+package rpc
 
 import (
 	"errors"
+	"github.com/ipaqsa/netcom/packUtils"
 	"net/rpc"
-	"netcom/packUtils"
 )
 
 func Send(addr, command string, pack *packUtils.Package, options *Options) (*packUtils.Package, error) {

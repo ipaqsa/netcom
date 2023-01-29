@@ -1,8 +1,8 @@
-package netcom
+package rpc
 
 import (
 	"errors"
-	"netcom/packUtils"
+	"github.com/ipaqsa/netcom/packUtils"
 )
 
 func ReadPack(data []byte, response *packUtils.Package, opt Options) (*packUtils.Package, *packUtils.Package, error) {

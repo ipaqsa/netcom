@@ -3,7 +3,7 @@ package packUtils
 import (
 	"crypto/rsa"
 	"errors"
-	"netcom/cryptoUtils"
+	"github.com/ipaqsa/netcom/cryptoUtils"
 	"strings"
 	"time"
 )

@@ -1,8 +1,8 @@
 package logger
 
 import (
+	"github.com/ipaqsa/netcom/configurator"
 	"log"
-	"netcom/configurator"
 	"os"
 )
 

@@ -5,7 +5,7 @@ import (
 	"crypto/rsa"
 	"encoding/json"
 	"errors"
-	"netcom/cryptoUtils"
+	"github.com/ipaqsa/netcom/cryptoUtils"
 )
 
 func (pack *Package) Marshal() ([]byte, error) {

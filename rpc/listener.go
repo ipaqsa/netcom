@@ -1,4 +1,4 @@
-package netcom
+package rpc
 
 import (
 	"net"
