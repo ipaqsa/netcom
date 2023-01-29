@@ -20,6 +20,8 @@ func initInfo() {
 	taddr := getOutboundIP()
 	if taddr == nil {
 		Info.Address = "internal network is not available"
+	} else {
+		Info.Address = taddr.String()
 	}
 }
 
