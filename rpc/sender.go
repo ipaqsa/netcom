@@ -11,6 +11,7 @@ func Send(addr, command string, pack *packUtils.Package, options *Options) (*pac
 		return nil, errors.New("pack is nil")
 	}
 	client, err := rpc.Dial("tcp", addr)
+	defer client.Close()
 	if err != nil {
 		return nil, err
 	}
