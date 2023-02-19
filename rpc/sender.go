@@ -11,10 +11,10 @@ func Send(addr, command string, pack *packUtils.Package, options *Options) (*pac
 		return nil, errors.New("pack is nil")
 	}
 	client, err := rpc.Dial("tcp", addr)
-	defer client.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer client.Close()
 	if options != nil {
 		if options.encrypt {
 			pack.Encrypt(options.key_sender, options.key_receiver, options.skey_size, options.rand_size)
